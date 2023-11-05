@@ -61,7 +61,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 		NumberFormat cr = NumberFormat.getCurrencyInstance();
 		String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
 
-		out.println("<tr><td>" + "<a href='/shop/addcart.jsp" + "?id=" + r.getString("productId") + "&name=" + r.getString("productName") + "&price=" + r.getString("productPrice") + "'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + x + "</td></tr>"); // Putting the data in the url sent to the /addcart.jsp page for each item.
+		out.println("<tr><td>" + "<a href=\"/shop/addcart.jsp" + "?id=" + r.getString("productId") + "&name=" + r.getString("productName") + "&price=" + r.getString("productPrice") + "\">Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + x + "</td></tr>"); // Putting the data in the url sent to the /addcart.jsp page for each item.
 	}
 	out.println("</table>");
 
