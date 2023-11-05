@@ -39,7 +39,7 @@ String pw = "304#sa#pw";
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	ResultSet r;	
-	if (name == null)
+	if (name == null) // Checks if there isn't any user input. Will display this query on page load.
 	{
 		Statement s = con.createStatement();
 		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
@@ -58,7 +58,10 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 
 	while (r.next())
 	{
-		out.println("<tr><td>" + "<a href='/shop/addcart.jsp" + "?id=" + r.getString("productId") + "&name=" + r.getString("productName") + "&price=" + r.getString("productPrice") + "'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + r.getString("productPrice") + "</td></tr>");
+		NumberFormat cr = NumberFormat.getCurrencyInstance();
+		String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
+
+		out.println("<tr><td>" + "<a href='/shop/addcart.jsp" + "?id=" + r.getString("productId") + "&name=" + r.getString("productName") + "&price=" + r.getString("productPrice") + "'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + x + "</td></tr>"); // Putting the data in the url sent to the /addcart.jsp page for each item.
 	}
 	out.println("</table>");
 
