@@ -45,6 +45,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)){
 	}
 	catch (Exception e){
 		System.err.println("SQLException: " + e); }
+		// TO DO:
 	try (PreparedStatement ps = con.prepareStatement("", Statement.RETURN_GENERATED_KEYS)){
 		ResultSet keys = ps.getGeneratedKeys();
 		keys.next();
