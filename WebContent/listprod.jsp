@@ -58,7 +58,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 
 	while (r.next())
 	{
-		out.println("<tr><td>" + '<a href' + "</td><td>" + r.getString("productName") + "</td><td>" + r.getString("productPrice") + "</td></tr>");
+		out.println("<tr><td>" + "<a href='/addcart.jsp'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + r.getString("productPrice") + "</td></tr>");
 	}
 	out.println("</table>");
 
