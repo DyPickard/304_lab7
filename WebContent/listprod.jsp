@@ -44,7 +44,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 		Statement s = con.createStatement();
 		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
 	}
-	else 
+	else // When there is user input.
 	{
 		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
 		name = "%" + name + "%";
@@ -65,6 +65,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	}
 	out.println("</table>");
 
+	con.close(); // Close the connection
 }
 
 catch (SQLException ex)
