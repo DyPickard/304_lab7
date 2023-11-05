@@ -18,9 +18,41 @@ String custId = request.getParameter("customerId");
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
 
-// Determine if valid customer id was entered
-// Determine if there are products in the shopping cart
-// If either are not true, display an error message
+
+String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
+String uid = "sa";
+String pw = "304#sa#pw"; 
+boolean validId = false;
+try (Connection con = DriverManager.getConnection(url, uid, pw)){	
+	try (Statement s = con.createStatement(); PreparedStatement ps = con.prepareStatement("SELECT customerId FROM customer")){
+		ResultSet rst = ps.executeQuery();
+		// to validate customer id, first get arraylist of customer ids
+		// If either are not true, display an error message ^
+		ArrayList<String> idArray = new ArrayList<>();
+		while (rst.next()){
+			idArray.add(rst.getString("customerId")); }
+		// Determine if valid customer id was entered
+		if (!idArray.contains(custId)){
+			out.println("Error. Customer ID entered is not valid. Please try again."); }
+		// Determine if there are products in the shopping cart
+		else if (productList == null){
+			out.println("Error. No items in cart."); }
+		else {
+			validId=true; }
+	}
+	catch (Exception e){
+		System.err.println("SQLException: " + e); }
+	try (PreparedStatement ps = con.prepareStatement("", Statement.RETURN_GENERATED_KEYS)){
+		ResultSet keys = ps.getGeneratedKeys();
+		keys.next();
+		int orderId = keys.getInt(1);
+
+	}
+}
+	catch (SQLException ex) {
+	System.err.println("SQLException: " + ex); }
+
+
 
 // Make connection
 

@@ -9,7 +9,7 @@
 <body>
 
 <h1>Order List</h1>
-//test
+
 <%
 //Note: Forces loading of SQL Server driver
 try
@@ -50,23 +50,22 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			double totalAmount = rst.getDouble("totalAmount");
 %>
 <table border="1">
-	<table border="1">
-			<tr>
-				<th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th>
-			</tr>
-			<tr>
-				<td><% out.println(orderID); %></td>
-				<td><% out.println(orderDate); %></td>
-				<td><% out.println(customerID); %></td>
-				<td><% out.println(customerNameFirst+" "+customerNameLast); %></td>
-				<td><% out.println(currFormat.format(totalAmount)); %></td>
-			</tr>
-	<table border="1">
-	<tr>
-	&nbsp
-	<th> Product ID </th> <th> Quantity </th> <th> Price </th>
-	</tr>
-	
+<table border="1">
+<tr>
+<th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th>
+</tr>
+<tr>
+<td><% out.println(orderID); %></td>
+<td><% out.println(orderDate); %></td>
+<td><% out.println(customerID); %></td>
+<td><% out.println(customerNameFirst+" "+customerNameLast); %></td>
+<td><% out.println(currFormat.format(totalAmount)); %></td>
+</tr>
+<table border="1">
+<tr>
+&nbsp
+<th> Product ID </th> <th> Quantity </th> <th> Price </th>
+</tr>	
 <%
 			prest.setString(1,orderID);
 			ResultSet rst2 = prest.executeQuery();
@@ -82,12 +81,12 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 				</tr>
 				<%
 			}
-	%>		
-	</table>
-	</table>
-	</table>
-	&nbsp
-	<%
+%>		
+</table>
+</table>
+</table>
+&nbsp
+<%
         }
 		
     }
