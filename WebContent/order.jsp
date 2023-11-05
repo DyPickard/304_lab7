@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery Order Processing</title>
+<title>Anthony & Dylan's Store Order Processing</title>
 </head>
 <body>
 
@@ -23,7 +23,9 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 String uid = "sa";
 String pw = "304#sa#pw"; 
 boolean validId = false;
+// Make connection
 try (Connection con = DriverManager.getConnection(url, uid, pw)){	
+	// validate 
 	try (Statement s = con.createStatement(); PreparedStatement ps = con.prepareStatement("SELECT customerId FROM customer")){
 		ResultSet rst = ps.executeQuery();
 		// to validate customer id, first get arraylist of customer ids
@@ -38,6 +40,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)){
 		else if (productList == null){
 			out.println("Error. No items in cart."); }
 		else {
+		// if id is valid and items are in cart
 			validId=true; }
 	}
 	catch (Exception e){
@@ -54,7 +57,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)){
 
 
 
-// Make connection
+
 
 // Save order information to database
 
