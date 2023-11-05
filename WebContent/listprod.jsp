@@ -9,6 +9,7 @@
 <body>
 
 <h1>Search for the products you want to buy:</h1>
+<h4><a href="/shop/showcart.jsp"> Go to cart</a></h4>
 
 <form method="get" action="listprod.jsp">
 <input type="text" name="productName" size="50">
