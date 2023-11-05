@@ -42,11 +42,11 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	if (name == null)
 	{
 		Statement s = con.createStatement();
-		r = s.executeQuery("SELECT productName, productPrice FROM product ORDER BY productName ASC;");
+		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
 	}
 	else 
 	{
-		PreparedStatement p = con.prepareStatement("SELECT productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
+		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
 		name = "%" + name + "%";
 		p.setString(1, name);
 		r = p.executeQuery();
@@ -58,7 +58,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 
 	while (r.next())
 	{
-		out.println("<tr><td>" + "<a href='/shop/addcart.jsp'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + r.getString("productPrice") + "</td></tr>");
+		out.println("<tr><td>" + "<a href='/shop/addcart.jsp" + "?id=" + r.getString("productId") + "&name=" + r.getString("productName") + "&price=" + r.getString("productPrice") + "'>Add to cart</a>" + "</td><td>" + r.getString("productName") + "</td><td>" + r.getString("productPrice") + "</td></tr>");
 	}
 	out.println("</table>");
 
