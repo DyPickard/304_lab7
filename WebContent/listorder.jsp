@@ -92,15 +92,8 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 		
     }
 catch (SQLException ex){
-    out.println("SQLException: " + ex); }
-
-
-
-
-
-
-
-// Close connection
+    out.println("SQLException: " + ex); 
+}
 %>
 
 
