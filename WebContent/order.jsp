@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery Order Processing</title>
+<title>Anthony & Dylan's Store Order Processing</title>
 </head>
 <body>
 
