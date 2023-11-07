@@ -17,7 +17,8 @@
 String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
 String uid = "sa";
 String pw = "304#sa#pw";
-
+// import numberformat for currency variables.
+NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 // Get customer id
 String custId = request.getParameter("customerId");
 @SuppressWarnings({"unchecked"})
@@ -57,7 +58,6 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 
 		// insert products into OrderProduct table using OrderId
 		String sql2 = "INSERT INTO orderproduct (orderId, productId, quantity) VALUES (?, ?, ?)";
-
 		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
 		while (iterator.hasNext()) {
 			// iterate over each product in the product list and get values for each
@@ -67,6 +67,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
         	String price = (String) product.get(2);
 			double pr = Double.parseDouble(price);
 			int qty = ( (Integer)product.get(3)).intValue();
+
 			// add the product to the orderproduct table for each product in list
 			PreparedStatement ps4 = con.prepareStatement("INSERT INTO orderproduct (orderId, productId, price, quantity) VALUES (?, ?, ?, ?)");
 			ps4.setInt(1,orderId);
@@ -76,13 +77,28 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 			ps4.executeUpdate();
 		}
 		// print out order summary
-		// add product info to table
-		out.println("<h2>Order Summary</h2>");
-		out.println(orderId);
 		
-		// just a test v
-		out.println("<Table border=1> <tr> <th> Product ID </th> <th> Price </th> <th> quantity </th>"
-		+"<tr> <td> 12 </td> <td> $100 </td> <td> 4 </td> </table>");
+		// add product info to table
+		PreparedStatement ps6 = con.prepareStatement("SELECT productname, price, quantity, orderproduct.productId FROM orderproduct join product ON orderproduct.productId = product.productId WHERE orderproduct.orderId = ?");
+		ps6.setInt(1,orderId);
+		ResultSet rs = ps6.executeQuery();
+		
+		out.println("<h2>Order Summary</h2>");
+		out.println("<h3>Order number: "+orderId+"</h3>");
+		out.println("<Table border=1> <tr> <th>Product Id</th><th> Product </th> <th> quantity </th><th> Price </th><th>Sub-total</th></tr>");
+		double totalPrice = 0;
+		while (rs.next()){
+			double subTotal = 0;
+			int prodId = rs.getInt("productId");
+			String prodName = rs.getString("productname");
+			int quantity = rs.getInt("quantity");
+			double price = rs.getDouble("price");
+			subTotal = price * quantity;
+			totalPrice += subTotal;
+			out.println("<tr><td>"+prodId+"</td><td>"+prodName+"</td><td>"+quantity+"</td><td>"+currFormat.format(price)+"</td><td>"+currFormat.format(subTotal)+"</tr>");
+		}
+		out.println("</table>");
+		out.println("<h3>Order Total: "+currFormat.format(totalPrice)+"</h3>");
 	}
 }
 		catch (Exception e){
