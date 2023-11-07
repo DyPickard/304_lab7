@@ -49,6 +49,10 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw))
 		{	
 			
 //TODO			
+// Steps: create a new instance of ordersummary by using an insert time, maybe with date, customerId, and (optional) total amount if it isn't too hard 
+// After we create a new ordersummary entry, we will get an orderId key which we can then use to INSERT data into the orderproduct by using the newly generated key.
+
+			// Following code doesn't work yet...
 			// Save order information to database
 			int orderId = 0;
 			Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
