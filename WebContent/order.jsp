@@ -50,6 +50,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		PreparedStatement ps3 = con.prepareStatement("UPDATE ordersummary SET orderId = ? WHERE customerId = ?");
 		ResultSet keys = ps2.getGeneratedKeys();
 		keys.next();
+		// order id always unique because it is auto-incremented in the db
 		int orderId = keys.getInt(1);
 		ps3.setInt(1,orderId);
 		ps3.setString(2,custId);
