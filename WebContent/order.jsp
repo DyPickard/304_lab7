@@ -59,13 +59,14 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 
 		Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
 		while (iterator.hasNext()) {
+			// iterate over each product in the product list and get values for each
 			Map.Entry<String, ArrayList<Object>> entry = iterator.next();
 			ArrayList<Object> product = (ArrayList<Object>) entry.getValue();
 			String productId = (String) product.get(0);
         	String price = (String) product.get(2);
 			double pr = Double.parseDouble(price);
 			int qty = ( (Integer)product.get(3)).intValue();
-			// add each product to the orderproduct table
+			// add the product to the orderproduct table for each product in list
 			PreparedStatement ps4 = con.prepareStatement("INSERT INTO orderproduct (orderId, productId, price, quantity) VALUES (?, ?, ?, ?)");
 			ps4.setInt(1,orderId);
 			ps4.setString(2,productId);
@@ -77,7 +78,8 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		// add product info to table
 		out.println("<h2>Order Summary</h2>");
 		out.println(orderId);
-		// test
+		
+		// just a test v
 		out.println("<Table border=1> <tr> <th> Product ID </th> <th> Price </th> <th> quantity </th>"
 		+"<tr> <td> 12 </td> <td> $100 </td> <td> 4 </td> </table>");
 	}
