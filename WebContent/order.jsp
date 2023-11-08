@@ -4,6 +4,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,8 @@ NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 String custId = request.getParameter("customerId");
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
+long millis = System.currentTimeMillis();
+java.sql.Date sqlDate = new java.sql.Date(millis);
 
 // Determine if valid customer id was entered
 
@@ -43,9 +46,10 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 	// id valid and product list is not empty
 
 		// saves info to database
-		String sql = "INSERT INTO ordersummary (customerId) VALUES (?)";
+		String sql = "INSERT INTO ordersummary (customerId, orderDate) VALUES (?, ?)";
 		PreparedStatement ps2 = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		ps2.setString(1,custId);
+		ps2.setDate(2, sqlDate);
 		int affectedRows = ps2.executeUpdate();
 		// have to execute update before getting generated keys, update orderId after creation
 		PreparedStatement ps3 = con.prepareStatement("UPDATE ordersummary SET orderId = ? WHERE customerId = ?");
