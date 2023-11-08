@@ -40,19 +40,18 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	//   - Use a PreparedStatement as will repeat this query many times
 	// For each product in the order
 		// Write out product information 
-		PreparedStatement prest = con.prepareStatement("SELECT orderId, productId, quantity, price FROM orderproduct WHERE orderId = ?");
-        while (rst.next()){
-			String orderID = rst.getString("orderId");
-			String orderDate = rst.getString("orderDate");
-			String customerID = rst.getString("customerId");
-			String customerNameFirst = rst.getString("firstName");
-			String customerNameLast = rst.getString("lastName");
-			double totalAmount = rst.getDouble("totalAmount");
+	out.println("<table border=\"1\"><tr><th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th></tr>");
+
+	PreparedStatement prest = con.prepareStatement("SELECT orderId, productId, quantity, price FROM orderproduct WHERE orderId = ?");
+	while (rst.next()){
+		String orderID = rst.getString("orderId");
+		String orderDate = rst.getString("orderDate");
+		String customerID = rst.getString("customerId");
+		String customerNameFirst = rst.getString("firstName");
+		String customerNameLast = rst.getString("lastName");
+		double totalAmount = rst.getDouble("totalAmount");
 %>
-<table border="1">
-	<tr>
-		<th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th>
-	</tr>
+
 	<tr>
 		<td><% out.println(orderID); %></td>
 		<td><% out.println(orderDate); %></td>
@@ -91,11 +90,9 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			</table>
 		</td>
 	</tr>
-</table>
-<br>
-<br>
 <%
         }
+	out.println("</table>");
 		
     }
 catch (SQLException ex){
