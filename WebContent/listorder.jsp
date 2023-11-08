@@ -50,42 +50,50 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 			double totalAmount = rst.getDouble("totalAmount");
 %>
 <table border="1">
-<table border="1">
-<tr>
-<th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th>
-</tr>
-<tr>
-<td><% out.println(orderID); %></td>
-<td><% out.println(orderDate); %></td>
-<td><% out.println(customerID); %></td>
-<td><% out.println(customerNameFirst+" "+customerNameLast); %></td>
-<td><% out.println(currFormat.format(totalAmount)); %></td>
-</tr>
-<table border="1">
-<tr>
-&nbsp
-<th> Product ID </th> <th> Quantity </th> <th> Price </th>
-</tr>	
-<%
-			prest.setString(1,orderID);
-			ResultSet rst2 = prest.executeQuery();
-			while (rst2.next()){
-				String productID = rst2.getString("productId");
-				String quantity = rst2.getString("quantity");
-				double price = rst2.getDouble("price");
+	<tr>
+		<th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th>
+	</tr>
+	<tr>
+		<td><% out.println(orderID); %></td>
+		<td><% out.println(orderDate); %></td>
+		<td><% out.println(customerID); %></td>
+		<td><% out.println(customerNameFirst+" "+customerNameLast); %></td>
+		<td><% out.println(currFormat.format(totalAmount)); %></td>
+	</tr>
+	<tr align="right">
+		<td colspan="4">
+			<table border="1">
+				<tr>
+					<th> Product ID </th> <th> Quantity </th> <th> Price </th>
+				</tr>	
+				<%
+					prest.setString(1,orderID);
+					ResultSet rst2 = prest.executeQuery();
+					while (rst2.next()){
+						String productID = rst2.getString("productId");
+						String quantity = rst2.getString("quantity");
+						double price = rst2.getDouble("price");
 				%>				
 				<tr>
-				<td><% out.println(productID); %></td>
-				<td><% out.println(quantity); %></td>
-				<td><% out.println(currFormat.format(price)); %></td>
+					<td>
+						<% out.println(productID); %>
+					</td>
+					<td>
+						<% out.println(quantity); %>
+						</td>
+					<td>
+						<% out.println(currFormat.format(price)); %>
+					</td>
 				</tr>
 				<%
-			}
-%>		
+					}
+				%>		
+			</table>
+		</td>
+	</tr>
 </table>
-</table>
-</table>
-&nbsp
+<br>
+<br>
 <%
         }
 		
