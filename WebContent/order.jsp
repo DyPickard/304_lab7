@@ -99,6 +99,12 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 			out.println("<tr><td>"+prodId+"</td><td>"+prodName+"</td><td>"+quantity+"</td><td>"+currFormat.format(price)+"</td><td>"+currFormat.format(subTotal)+"</tr>");
 		}
 
+		// Set the order total in ordersummary
+		PreparedStatement ps8 = con.prepareStatement("UPDATE ordersummary SET totalAmount = ? WHERE orderId = ?;");
+		ps8.setDouble(1, totalPrice);
+		ps8.setInt(2, orderId);
+		ps8.executeUpdate();
+
 		// Get customer name and info
 		PreparedStatement ps7 = con.prepareStatement("SELECT ordersummary.customerId as id, firstName, lastName FROM ordersummary JOIN customer ON ordersummary.customerId = customer.customerId WHERE ordersummary.customerId = ?;");
 		ps7.setString(1, custId);
@@ -106,6 +112,11 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		rs1.next();
 		out.println("</table>");
 		out.println("<h3>Order Total: "+currFormat.format(totalPrice)+"</h3><h3>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName"));
+
+		// Clear cart
+		session.removeAttribute("productList");
+
+		con.close();
 	}
 }
 		catch (Exception e){
