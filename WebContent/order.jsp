@@ -111,7 +111,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		ResultSet rs1 = ps7.executeQuery();
 		rs1.next();
 		out.println("</table>");
-		out.println("<h3>Order Total: "+currFormat.format(totalPrice)+"</h3><h3>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName"));
+		out.println("<h3>Order Total: "+currFormat.format(totalPrice)+"</h3><h3>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h3><h4><a href=\"/shop/\">Return to main menu</a></h3>");
 
 		// Clear cart
 		session.removeAttribute("productList");
