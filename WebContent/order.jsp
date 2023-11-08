@@ -123,14 +123,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 	out.println(e);
 }
 
-// Your code is in the other order file in the repo, I was having issues working on it so had to start from scratch, renamed it to order.jsp for testing.
-// Seems to be working just need to finish the last part of the assignment + the extra stuff to add.
-
 // TO DO
-
-// Update total amount for order record
-// Print out order summary
-// Clear cart if order placed successfully
 // Bonus Stuff
 %>
 </BODY>
