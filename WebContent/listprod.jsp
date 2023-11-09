@@ -93,7 +93,6 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 		// Search when category is set to all
 		else
 		{
-			out.println(" 1.5 " + category + " " + name);
 			PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
 			name = "%" + name + "%";
 			p.setString(1, name);
