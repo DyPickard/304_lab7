@@ -30,8 +30,11 @@
 
 <% // Get product name to search for
 String name = request.getParameter("productName");
-// TO DO
-String category = request.getParameter("category");		
+String category = request.getParameter("category");	
+if (category == null){
+	category = "All";
+}	
+
 //Note: Forces loading of SQL Server driver
 try
 {	// Load driver class
@@ -50,19 +53,20 @@ catch (java.lang.ClassNotFoundException e)
 String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
 String uid = "sa";
 String pw = "304#sa#pw"; 
-
 try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	ResultSet r;
-	if (name == null) // Checks if there isn't any user input. Will display this query on page load.
+	// if no category and no search term
+	if (category.equals("All") && name == null){
+		Statement s = con.createStatement();
+		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
+	}
+	// if category with no search term
+	else if (name == null) // Checks if there isn't any user input. Will display this query on page load.
 	{
 		//Statement s = con.createStatement();
 		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product JOIN category on product.categoryId = category.categoryId WHERE categoryName = ? ORDER BY productName ASC;");
 		p.setString(1, category);
 		r = p.executeQuery();
-	}
-	if (category.equals("All")){
-		Statement s = con.createStatement();
-		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
 	}
 	else // When there is user input.
 	{
