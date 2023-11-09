@@ -14,12 +14,25 @@
 
 <form method="get" action="listprod.jsp">
 <input type="text" name="productName" size="50">
+<label for="category">Category</label>
+<select id="category" name="category">
+<option value="All">All</option>
+<option value="Beverages">Beverages</option>
+<option value="Condiments">Condiments</option>
+<option value="Dairy Products">Dairy Products</option>
+<option value="Produce">Produce</option>
+<option value="Meat/Poultry">Meat/Poultry</option>
+<option value="Seafood">Seafood</option>
+<option value="Confections">Confections</option>
+<option value="Grains/Cereals">Grains/Cereals</option>
+
 <input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
 </form>
 
 <% // Get product name to search for
 String name = request.getParameter("productName");
-		
+// TO DO
+String category = request.getParameter("category");		
 //Note: Forces loading of SQL Server driver
 try
 {	// Load driver class
