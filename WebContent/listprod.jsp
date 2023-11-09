@@ -82,19 +82,35 @@ String pw = "304#sa#pw";
 try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	ResultSet r;
 	// if no category and no search term
-	if (category.equals("All") && name == null){
-		Statement s = con.createStatement();
-		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
+	if (category.equals("All")){
+
+		// Shows all the items
+		if ( name == null || name.isEmpty())
+		{
+			Statement s = con.createStatement();
+			r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
+		}
+		// Search when category is set to all
+		else
+		{
+			out.println(" 1.5 " + category + " " + name);
+			PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
+			name = "%" + name + "%";
+			p.setString(1, name);
+			r = p.executeQuery();
+		}
+		
 	}
 	// if category with no search term
-	else if (name == null) // Checks if there isn't any user input. Will display this query on page load.
+	else if (name.isEmpty()) // Checks if there isn't any user input. Will display this query on page load.
 	{
 		//Statement s = con.createStatement();
 		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product JOIN category on product.categoryId = category.categoryId WHERE categoryName = ? ORDER BY productName ASC;");
 		p.setString(1, category);
 		r = p.executeQuery();
+
 	}
-	else // When there is user input.
+	else // When there is user input for both search and category
 	{
 		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product JOIN category on product.categoryId = category.categoryId WHERE productName LIKE ? AND categoryName = ? ORDER BY productName ASC;");
 		name = "%" + name + "%";
