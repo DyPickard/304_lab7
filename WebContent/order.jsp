@@ -10,9 +10,36 @@
 <html>
 <head>
 <title>A&D Store Order Processing</title>
+<style>
+        .menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        overflow: hidden;
+        background-color: #333;
+        }
+        .menu li {
+        float: left;
+        }
+        .menu li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        }
+        .menu li a:hover {
+        background-color: #111;
+        }
+</style> 
 </head>
 <body>
-
+<ul class="menu">
+        <li><a href="/shop">Home</a></li>
+        <li><a href="listprod.jsp">Products</a></li>
+        <li><a href="listorder.jsp">Orders</a></li>
+        <li><a href="showcart.jsp">Cart</a></li>
+</ul>
 <% 
 
 String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
@@ -112,7 +139,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		rs1.next();
 		out.println("</table>");
 		out.println("<h2>Order Number: "+orderId+"</h2>");
-		out.println("<h2>Order Total: "+currFormat.format(totalPrice)+"</h2><h2>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h2><h3><a href=\"/shop/\">Return to main menu</a></h3>");
+		out.println("<h2>Order Total: "+currFormat.format(totalPrice)+"</h2><h2>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h2><h3><a href=\"/shop/\">Return to Home Page</a></h3>");
 
 		// Clear cart
 		session.removeAttribute("productList");
