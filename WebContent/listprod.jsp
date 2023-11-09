@@ -25,8 +25,7 @@
 <option value="Seafood">Seafood</option>
 <option value="Confections">Confections</option>
 <option value="Grains/Cereals">Grains/Cereals</option>
-
-<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
+<input type="submit" value="Submit"><input type="reset" value="Reset">
 </form>
 
 <% // Get product name to search for
@@ -53,17 +52,24 @@ String uid = "sa";
 String pw = "304#sa#pw"; 
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw)){
-	ResultSet r;	
+	ResultSet r;
 	if (name == null) // Checks if there isn't any user input. Will display this query on page load.
 	{
+		//Statement s = con.createStatement();
+		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product JOIN category on product.categoryId = category.categoryId WHERE categoryName = ? ORDER BY productName ASC;");
+		p.setString(1, category);
+		r = p.executeQuery();
+	}
+	if (category.equals("All")){
 		Statement s = con.createStatement();
 		r = s.executeQuery("SELECT productId, productName, productPrice FROM product ORDER BY productName ASC;");
 	}
 	else // When there is user input.
 	{
-		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName ASC;");
+		PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice FROM product JOIN category on product.categoryId = category.categoryId WHERE productName LIKE ? AND categoryName = ? ORDER BY productName ASC;");
 		name = "%" + name + "%";
 		p.setString(1, name);
+		p.setString(2, category);
 		r = p.executeQuery();
 	}
 
