@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Anthony & Dylan's Store Order Processing</title>
+<title>A&D Store Order Processing</title>
 </head>
 <body>
 
@@ -84,9 +84,9 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		ps6.setInt(1,orderId);
 		ResultSet rs = ps6.executeQuery();
 		
-		out.println("<h2>Order Summary</h2>");
-		out.println("<h3>Order number: "+orderId+"</h3>");
-		out.println("<Table border=1> <tr> <th>Product Id</th><th> Product </th> <th> quantity </th><th> Price </th><th>Sub-total</th></tr>");
+		out.println("<h1>Order Summary</h1>");
+		
+		out.println("<Table border=1> <tr> <th>Product Id</th><th> Product </th> <th> Quantity </th><th> Price </th><th>Sub-Total</th></tr>");
 		double totalPrice = 0;
 		while (rs.next()){
 			double subTotal = 0;
@@ -98,7 +98,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 			totalPrice += subTotal;
 			out.println("<tr><td>"+prodId+"</td><td>"+prodName+"</td><td>"+quantity+"</td><td>"+currFormat.format(price)+"</td><td>"+currFormat.format(subTotal)+"</tr>");
 		}
-
+		
 		// Set the order total in ordersummary
 		PreparedStatement ps8 = con.prepareStatement("UPDATE ordersummary SET totalAmount = ? WHERE orderId = ?;");
 		ps8.setDouble(1, totalPrice);
@@ -111,7 +111,8 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		ResultSet rs1 = ps7.executeQuery();
 		rs1.next();
 		out.println("</table>");
-		out.println("<h3>Order Total: "+currFormat.format(totalPrice)+"</h3><h3>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h3><h4><a href=\"/shop/\">Return to main menu</a></h3>");
+		out.println("<h2>Order Number: "+orderId+"</h2>");
+		out.println("<h2>Order Total: "+currFormat.format(totalPrice)+"</h2><h2>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h2><h3><a href=\"/shop/\">Return to main menu</a></h3>");
 
 		// Clear cart
 		session.removeAttribute("productList");

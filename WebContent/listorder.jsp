@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery Order List</title>
+<title>A&D Grocery Order List</title>
 </head>
 <body>
 
 <h1>Order List</h1>
-
+<h4><a href="/shop">Home</a></h4>
 <%
 //Note: Forces loading of SQL Server driver
 try
@@ -31,15 +31,14 @@ String pw = "304#sa#pw";
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	Statement stmt = con.createStatement();) { 
-// Write query to retrieve all order summary records
-        ResultSet rst = stmt.executeQuery("SELECT * FROM ordersummary join customer ON ordersummary.customerId = customer.customerId");
-		
-// For each order in the ResultSet
+	// Write query to retrieve all order summary records
+    ResultSet rst = stmt.executeQuery("SELECT * FROM ordersummary join customer ON ordersummary.customerId = customer.customerId");		
+	// For each order in the ResultSet
 	// Print out the order summary information
 	// Write a query to retrieve the products in the order
-	//   - Use a PreparedStatement as will repeat this query many times
+	// Use a PreparedStatement as will repeat this query many times
 	// For each product in the order
-		// Write out product information 
+	// Write out product information 
 	out.println("<table border=\"1\"><tr><th> Order ID </th> <th> Order Date </th> <th> Customer ID </th> <th> Customer Name </th> <th> Total Amount </th></tr>");
 
 	PreparedStatement prest = con.prepareStatement("SELECT orderId, productId, quantity, price FROM orderproduct WHERE orderId = ?");
@@ -93,7 +92,8 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 <%
         }
 	out.println("</table>");
-		
+	// close connection
+	con.close();
     }
 catch (SQLException ex){
     out.println("SQLException: " + ex); 

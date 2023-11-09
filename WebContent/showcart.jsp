@@ -10,11 +10,12 @@
 <title>Your Shopping Cart</title>
 </head>
 <body>
-
+<h4><a href="/shop">Home</a></h4>
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
+
 
 if (productList == null)
 {	out.println("<H1>Your shopping cart is empty!</H1>");
@@ -78,6 +79,7 @@ else
 }
 %>
 <h2><a href="listprod.jsp">Continue Shopping</a></h2>
+<h2><a href="clearcart.jsp">Clear Cart</a></h2>
 </body>
 </html> 
 

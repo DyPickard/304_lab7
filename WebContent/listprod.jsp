@@ -4,11 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery</title>
+<title>A&D Grocery</title>
 </head>
 <body>
 
 <h1>Search for the products you want to buy:</h1>
+<h4><a href="/shop">Home</a></h4>
 <h4><a href="/shop/showcart.jsp"> Go to cart</a></h4>
 
 <form method="get" action="listprod.jsp">
