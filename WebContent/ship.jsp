@@ -34,16 +34,48 @@
 		}
 		// order ID valid
 		else {
-			out.println("Order found. ID: "+orderID);
+			// Start a transaction (turn-off auto-commit)
+			//out.println("Order found. ID: "+orderID);
 			Statement stmt = con.createStatement();
 			con.setAutoCommit(false);
+			// Retrieve all items in order with given id
 			ResultSet rst1 = stmt.executeQuery("SELECT * FROM orderproduct WHERE orderId = "+orderID);
+
+			// TODO: Create a new shipment record.
+			String sql = "INSERT INTO shipment (shipmentDate) VALUES (GETDATE())";
+			PreparedStatement p2 = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			p2.executeUpdate();
+
+			// TODO: For each item verify sufficient quantity available in warehouse 1.
+			// for each product in order, check inventory
+			while (rst1.next()){
+				int product = rst1.getInt("productId");
+				int prodQuant = rst1.getInt("quantity");
+				PreparedStatement p3 = con.prepareStatement("SELECT * FROM productinventory WHERE productId = ?");
+				p3.setInt(1,product);
+				ResultSet rst2 = p3.executeQuery();
+				// check if returned results successfully
+				if (!rst2.next()){
+					out.println("Error. No results found for that product in warehouse.");
+				}
+				// no error with query
+				else {
+				int whQuant = rst2.getInt("quantity");
+				// TO DO: check inventory and add products
+
+
+
+
+				}
+			}
+
+
 		}
-	// TODO: Start a transaction (turn-off auto-commit)
 	
-	// TODO: Retrieve all items in order with given id
-	// TODO: Create a new shipment record.
-	// TODO: For each item verify sufficient quantity available in warehouse 1.
+	
+	
+	
+	
 	// TODO: If any item does not have sufficient inventory, cancel transaction and rollback. Otherwise, update inventory for each item.
 	
 	// TODO: Auto-commit should be turned back on
