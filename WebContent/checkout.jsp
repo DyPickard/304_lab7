@@ -1,42 +1,17 @@
-<!DOCTYPE html>
 <html>
 <head>
-<title>A&D CheckOut Line</title>
-<style>
-        .menu {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        align-items: center;
-        overflow: hidden;
-        background-color: #333;
-        }
-        .menu li {
-        float: left;
-        }
-        .menu li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        }
-        .menu li a:hover {
-        background-color: #111;
-        }
-</style> 
+<title>Ray's Grocery</title>
 </head>
 <body>
-<ul class="menu">
-        <li><a href="/shop">Home</a></li>
-        <li><a href="listprod.jsp">Products</a></li>
-        <li><a href="listorder.jsp">Orders</a></li>
-        <li><a href="showcart.jsp">Cart</a></li>
-</ul>
-<h1>Enter your customer id to complete the transaction:</h1>
+
+<h1>Enter your customer id and password to complete the transaction:</h1>
 
 <form method="get" action="order.jsp">
-<input type="number" name="customerId" min="1">
-<input type="submit" value="Submit"><input type="reset" value="Reset">
+<table>
+<tr><td>Customer ID:</td><td><input type="text" name="customerId" size="20"></td></tr>
+<tr><td>Password:</td><td><input type="password" name="password" size="20"></td></tr>
+<tr><td><input type="submit" value="Submit"></td><td><input type="reset" value="Reset"></td></tr>
+</table>
 </form>
 
 </body>
