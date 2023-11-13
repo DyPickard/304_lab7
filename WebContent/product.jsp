@@ -6,11 +6,11 @@
 <html>
 <head>
 <title>A&D Grocery</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<%@ include file="header.jsp" %>
+<%@ include file="titleBar.jsp" %>
+
 
 <%
 //Note: Forces loading of SQL Server driver

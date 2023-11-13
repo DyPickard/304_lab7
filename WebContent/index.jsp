@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Ray's Grocery Main Page</title>
-</head>
+
+<%@ include file="titleBar.jsp" %>
+
 <body>
 <h1 align="center">Welcome to Ray's Grocery</h1>
 
