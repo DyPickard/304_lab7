@@ -8,8 +8,12 @@
 
 <%@ include file="auth.jsp"%>
 <%@ include file="jdbc.jsp" %>
+<%@ page import="java.text.NumberFormat" %>
+
 
 <%
+NumberFormat currFormat = NumberFormat.getCurrencyInstance();
+
 // Write SQL query that prints out total order amount by day
 try {
     getConnection();
@@ -19,7 +23,7 @@ try {
     out.println("<h2>Administrator Sales Report by Day</h3><table border=2><tr><th>Order Date</th><th>Total Order Amount</th></tr>");
 
     while (r.next()){
-        out.println("<tr><td>" + r.getDate("d") + "</td><td>" + r.getFloat("t") + "</td></tr>");
+        out.println("<tr><td>" + r.getDate("d") + "</td><td>" + currFormat.format(r.getFloat("t")) + "</td></tr>");
     }
     out.println("</table><h2><a href=\"/shop/index.jsp\">Return to Main Menu</a></h3>");
 }
