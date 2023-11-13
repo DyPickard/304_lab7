@@ -5,7 +5,8 @@
 <html>
 <head>
 
-<%@ include file="titleBar.jsp" %>
+<%@ include file="boilerplate.jsp" %>
+
 
 <h1>Order List</h1>
 <%

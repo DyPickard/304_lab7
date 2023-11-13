@@ -9,10 +9,7 @@
 </head>
 <body>
 
-<%@ include file="titleBar.jsp" %>
-<%@ include file="checkIfLoggedIn.jsp" %>
-
-
+<%@ include file="boilerplate.jsp" %>
 
 <%
 //Note: Forces loading of SQL Server driver

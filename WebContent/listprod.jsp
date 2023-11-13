@@ -5,10 +5,7 @@
 <html>
 <head>
 
-<%@ include file="titleBar.jsp" %>
-<%@ include file="checkIfLoggedIn.jsp" %>
-
-
+<%@ include file="boilerplate.jsp" %>
 
 <h1>Search for the products you want to buy:</h1>
 

@@ -7,9 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="titleBar.jsp" %>
-<%@ include file="checkIfLoggedIn.jsp" %>
-
+<%@ include file="boilerplate.jsp" %>
 
 <%
 // Get the current list of products
