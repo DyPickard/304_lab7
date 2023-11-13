@@ -29,9 +29,3 @@
         <li><a href="listorder.jsp">Orders</a></li>
         <li><a href="showcart.jsp">Cart</a></li>
 </ul>
-
-<%
-	if ((String) session.getAttribute("authenticatedUser") == null){
-        response.sendRedirect("login.jsp");
-    }
-%>
