@@ -8,6 +8,8 @@
 <html>
 <head>
 <%@ include file="titleBar.jsp" %>
+<%@ include file="checkIfLoggedIn.jsp" %>
+
 
 <%
 // Get the current list of products

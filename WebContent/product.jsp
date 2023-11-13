@@ -10,6 +10,8 @@
 <body>
 
 <%@ include file="titleBar.jsp" %>
+<%@ include file="checkIfLoggedIn.jsp" %>
+
 
 
 <%

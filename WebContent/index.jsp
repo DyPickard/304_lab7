@@ -3,6 +3,7 @@
 <head>
 
 <%@ include file="titleBar.jsp" %>
+<%@ include file="checkIfLoggedIn.jsp" %>
 
 <body>
 <h1 align="center">Welcome to Ray's Grocery</h1>

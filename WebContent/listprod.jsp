@@ -6,6 +6,8 @@
 <head>
 
 <%@ include file="titleBar.jsp" %>
+<%@ include file="checkIfLoggedIn.jsp" %>
+
 
 
 <h1>Search for the products you want to buy:</h1>
