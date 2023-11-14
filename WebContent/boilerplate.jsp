@@ -28,4 +28,7 @@
         <li><a href="listprod.jsp">Products</a></li>
         <li><a href="listorder.jsp">Orders</a></li>
         <li><a href="showcart.jsp">Cart</a></li>
+        <li><a href="login.jsp">Login</a></li>
+        <li><a href="customer.jsp">My Profile</a><li>
+        <li><a href="logout.jsp">Log out</a></li>
 </ul>
