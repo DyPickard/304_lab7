@@ -48,28 +48,55 @@
 
 			// TODO: For each item verify sufficient quantity available in warehouse 1.
 			// for each product in order, check inventory
+			boolean shipValid = true;
 			while (rst1.next()){
 				int product = rst1.getInt("productId");
 				int prodQuant = rst1.getInt("quantity");
 				PreparedStatement p3 = con.prepareStatement("SELECT * FROM productinventory WHERE productId = ?");
 				p3.setInt(1,product);
 				ResultSet rst2 = p3.executeQuery();
+
 				// check if returned results successfully
 				if (!rst2.next()){
 					out.println("Error. No results found for that product in warehouse.");
 				}
+
 				// no error with query
 				else {
-				int whQuant = rst2.getInt("quantity");
-				// TO DO: check inventory and add products
+					int whQuant = rst2.getInt("quantity");
+					// verify inventory
 
 
+					// if warehouse has less than amount ordered
+					if (whQuant < prodQuant){
+						out.println("<h2>Shipment failed to process. Insufficient inventory for product number: "+product+"</h2>");
+						shipValid = false;
+					}
+					// update warehouse inventory
+					else {
+						int newQnt = (whQuant - prodQuant);
+						out.println("<table><tr><th>Ordered product: </th><td>"+product+"</td>");
+						out.println("<th>Quantity: </th><td>"+prodQuant+"</td>");
+						out.println("<th>Previous inventory: </th><td>"+whQuant+"</td>");
+						out.println("<th>New inventory: </th><td>"+newQnt+"</td></tr></table>");
 
-
+						PreparedStatement p4 = con.prepareStatement("UPDATE productinventory SET quantity = ? WHERE productId = ?");
+						p4.setInt(1,newQnt);
+						p4.setInt(2,product);
+						p4.executeUpdate();
+					}
 				}
 			}
-
-
+			// if shipment valid, commit transaction
+			if (shipValid){
+				con.commit();
+				out.println("<h2>Shipment successfully processed</h2>");
+			}
+			// if shipment invalid, rollback transaction
+			else {
+				con.rollback();
+			}
+			con.setAutoCommit(true);
 		}
 	
 	
