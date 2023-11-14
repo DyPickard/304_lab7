@@ -75,11 +75,11 @@
 					// update warehouse inventory
 					else {
 						int newQnt = (whQuant - prodQuant);
-						out.println("<table><tr><th>Ordered product: </th><td>"+product+"</td>");
-						out.println("<th>Quantity: </th><td>"+prodQuant+"</td>");
-						out.println("<th>Previous inventory: </th><td>"+whQuant+"</td>");
-						out.println("<th>New inventory: </th><td>"+newQnt+"</td></tr></table>");
-
+						out.println("<table><tr><th><h3>Ordered product: </h3></th><td style="+"width:10%"+"><h3>"+product+"</h3></td>");
+						out.println("<th><h3>Quantity: </h3></th><td style="+"width:10%"+" ><h3>"+prodQuant+"</h3></td>");
+						out.println("<th><h3>Previous inventory: </h3></th><td style="+"width:10%"+" ><h3>"+whQuant+"</h3></td>");
+						out.println("<th><h3>New inventory: </h3></th><td style="+"width:10%"+"><h3>"+newQnt+"</h3></td></tr></table>");
+						// update inventory
 						PreparedStatement p4 = con.prepareStatement("UPDATE productinventory SET quantity = ? WHERE productId = ?");
 						p4.setInt(1,newQnt);
 						p4.setInt(2,product);
