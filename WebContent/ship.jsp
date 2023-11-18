@@ -16,6 +16,14 @@
 <%@ include file="header.jsp" %>
 
 <%
+	try
+	{	// Load driver class
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	}
+	catch (java.lang.ClassNotFoundException e)
+	{
+		out.println("ClassNotFoundException: " +e);
+	}
 	String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
 	String uid = "sa";
 	String pw = "304#sa#pw";
