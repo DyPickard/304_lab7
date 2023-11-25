@@ -1,0 +1,5 @@
+Q1: /Depts/Dept[budget<400000]
+
+Q2. /Depts/Dept[name="Management"]/Emp[name > 'K']
+
+Q3. data(/Depts/Dept[name="Consulting"]/Emp[2]/@eno)
