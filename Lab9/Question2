@@ -1,14 +1,13 @@
 1.
-
 CREATE VIEW deptSummary (dno, dname, totalEmp, totalSalary) AS
 SELECT dept.dno, dname, COUNT(eno) AS totalEmp, SUM(salary) AS totalSalary
-FROM emp join dept on emp.dno = dept.dno
+FROM emp JOIN dept ON emp.dno = dept.dno
 GROUP BY dno;
 
 2.
 CREATE VIEW empSummary (eno, ename, salary, bdate, dno, totalProj, totalHours) AS
 SELECT emp.eno, ename, salary, bdate, dno, t2.totalProj, t2.totalHours
-FROM emp left join
-(SELECT eno, COUNT(pno) as totalProj, SUM(hours) as totalHours FROM workson GROUP BY eno) as t2
+FROM emp LEFT JOIN
+(SELECT eno, COUNT(pno) as totalProj, SUM(hours) AS totalHours FROM workson GROUP BY eno) AS t2
 ON emp.eno = t2.eno
 WHERE (dno = 'D1' OR dno ='D2' OR dno='D3') AND bdate>'1966-06-08';
