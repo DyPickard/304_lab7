@@ -33,12 +33,15 @@
 
         <%
 	String userName2 = (String) session.getAttribute("authenticatedUser");
+        // if logged in
 	if (userName2 != null){
 		out.println("<li><a href=\"logout.jsp\">Log out</a></li>");
                 out.println("<li><a href=\"customer.jsp\">My Profile</a><li>");
         }
+        // if not logged in
         else if (userName2 == null){
                 out.println("<li><a href=\"login.jsp\">Login</a></li>");
+                out.println("<li><a href=\"accountCreation.jsp\">Create Account</a></li>");
         }
         %>
 </ul>
