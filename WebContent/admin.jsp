@@ -4,7 +4,7 @@
 <title>Administrator Page</title>
 </head>
 <body>
-
+<%@ include file="boilerplate.jsp" %>
 
 <%@ include file="auth.jsp"%>
 <%@ include file="jdbc.jsp" %>
