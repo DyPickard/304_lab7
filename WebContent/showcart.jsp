@@ -38,11 +38,12 @@ else
 			continue;
 		}
 		
-		out.print("<tr><td><a href=\"removeCart.jsp?id=" + product.get(0) + "\" style=color:red;>Remove</a></td>");
+		out.print("<tr><form name=\"UpdateCartQuantity\" method=get action=\"updateCartQuantity.jsp\"><td><a href=\"removeCart.jsp?id=" + product.get(0) + "\" style=color:red;>Remove</a></td>");
 		out.print("<td>"+product.get(0)+"</td>");
 		out.print("<td>"+product.get(1)+"</td>");
 
-		out.print("<td align=\"center\">"+product.get(3)+"</td>");
+		out.print("<td><input type=hidden name=id value=\"" + product.get(0) + "\"/><input style=\"text-align:right; width:4vw\" id=newQuantity name=newQuantity type=number value=\"" + product.get(3) + "\"/></td>");
+
 		Object price = product.get(2);
 		Object itemqty = product.get(3);
 		double pr = 0;
@@ -66,8 +67,8 @@ else
 		}		
 
 		out.print("<td align=\"right\">"+currFormat.format(pr)+"</td>");
-		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td></tr>");
-		out.println("</tr>");
+		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td>");
+		out.println("<td><input class=submit type=submit value=\"Update Quantity\"></td></form></tr>");
 		total = total +pr*qty;
 	}
 	out.println("<tr><td colspan=\"4\" align=\"right\"><b>Order Total</b></td>"
