@@ -7,9 +7,11 @@
         align-items: center;
         overflow: hidden;
         background-color: #333;
+        display: flex;
         }
         .menu li {
         float: left;
+        color: white;
         }
         .menu li a {
         display: block;
@@ -38,6 +40,7 @@
                 out.print("<li><a href=\"customer.jsp\">My Profile</a><li>");
                 out.print("<li><a href=\"admin.jsp\">Admin</a></li>");
                 out.print("<li><a href=\"logout.jsp\">Log out</a></li>");
+                out.print("<li style=\"margin-left:auto; margin-right:14px;\">Hello <u>" + userName2 + "</u></li>");
         }
         // if not logged in
         else if (userName2 == null){
