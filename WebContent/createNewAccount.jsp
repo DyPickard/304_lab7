@@ -42,6 +42,7 @@
         }
     }
 
+    // validates password
     boolean invalidPassword = true;
     char[] pChars = password.toCharArray();
     boolean hasUpper = false;
