@@ -24,7 +24,7 @@ else
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 	out.println("<h1>Your Shopping Cart</h1>");
-	out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
+	out.print("<table><tr><th></th><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 	out.println("<th>Price</th><th>Subtotal</th></tr>");
 
 	double total =0;
@@ -38,7 +38,8 @@ else
 			continue;
 		}
 		
-		out.print("<tr><td>"+product.get(0)+"</td>");
+		out.print("<tr><td><a href=\"removeCart.jsp?id=" + product.get(0) + "\" style=color:red;>Remove</a></td>");
+		out.print("<td>"+product.get(0)+"</td>");
 		out.print("<td>"+product.get(1)+"</td>");
 
 		out.print("<td align=\"center\">"+product.get(3)+"</td>");
