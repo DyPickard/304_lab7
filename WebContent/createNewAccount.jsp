@@ -22,22 +22,72 @@
     String province = request.getParameter("province");
     String country = request.getParameter("country");
 
-    
-    // invalid password
+
+    // validate first name and last name
+    boolean invalidName = false;
+    firstName = firstName.trim();
+    lastName = lastName.trim();
+    char[] fChars = firstName.toCharArray();
+    char[] lChars = lastName.toCharArray();
+    // checks first name
+    for (char c : fChars){
+        if (!Character.isLetter(c)){
+            invalidName = true;
+        }
+    }
+    // checks last name
+    for (char c : lChars){
+        if (!Character.isLetter(c)){
+            invalidName = true;
+        }
+    }
+
+    boolean invalidPassword = true;
+    char[] pChars = password.toCharArray();
+    boolean hasUpper = false;
+    boolean hasLower = false;
+    boolean hasNumber = false;
+    boolean hasSymbol = false;
+    for (char c : pChars){
+        if (Character.isUpperCase(c)){
+            hasUpper=true;
+        }
+        if (Character.isLowerCase(c)){
+            hasLower=true;
+        }
+        if (Character.isDigit(c)){
+            hasNumber=true;
+        }
+        if (!Character.isDigit(c) && !Character.isLetter(c)){
+            hasSymbol = true;
+        }
+    }
+    if (hasUpper && hasLower && hasNumber && hasSymbol){
+        invalidPassword=false;
+    }
+
+    // if passwords not the same
     if (!password.equals(passwordConfirm)){
         response.sendRedirect("accountCreation.jsp?error=Error, passwords do not match.");
     }
+    // if first or last name invalid
+    else if (invalidName){
+    response.sendRedirect("accountCreation.jsp?error=Error, first and last name must only contain letters.");
+    }
+    else if (invalidPassword){
+        response.sendRedirect("accountCreation.jsp?error=Error, password must contain a uppercase letter, a lowercase letter, a number, and a symbol.");
+    }
     else {
         if (username != null && password != null) {
-        //Note: Forces loading of SQL Server driver
-        // try
-        // {	// Load driver class
-	    // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        // }
-        // catch (java.lang.ClassNotFoundException e)
-        // {
-	    // out.println("ClassNotFoundException: " +e);
-        // }
+        // Note: Forces loading of SQL Server driver
+        try
+        {	// Load driver class
+	    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        }
+        catch (java.lang.ClassNotFoundException e)
+        {
+	    out.println("ClassNotFoundException: " +e);
+        }
         // Make connection
         String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
         String uid = "sa";
@@ -45,6 +95,17 @@
 
         try (Connection con = DriverManager.getConnection(url, uid, pw)) { 
             Statement stmt = con.createStatement();
+
+            // validate unique username
+            PreparedStatement ps0 = con.prepareStatement("SELECT userid FROM customer WHERE userid = ?");
+            ps0.setString(1,username);
+            ResultSet rs = ps0.executeQuery();
+            // if username is already in database:
+            if (!rs.next() == false){
+                response.sendRedirect("accountCreation.jsp?error=Username taken. Please try again.");
+            }
+
+
             PreparedStatement ps = con.prepareStatement("INSERT INTO customer (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             ps.setString(1,firstName);
             ps.setString(2,lastName);

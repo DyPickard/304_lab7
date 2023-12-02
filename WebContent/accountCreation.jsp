@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Password</font></div></td>
-	<td><input type="password" name="password" size=10 maxlength="30" required></td>
+	<td><input type="password" name="password" size=10 minlength="5" maxlength="30" required></td>
 </tr>
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Confirm Password</font></div></td>
