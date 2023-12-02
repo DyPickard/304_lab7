@@ -41,11 +41,11 @@
 			r.next();
 
 			// Checks if password is valid
-			if (r.getString("password") == password){
+			if (r.getString("password").equals(password)){
 				retStr = r.getString("userid");
 			}
 			else{
-				retStr = "";			
+				retStr = null;			
 			}
 		} 
 		catch (SQLException ex) {
