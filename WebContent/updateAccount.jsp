@@ -5,7 +5,7 @@
 %>
 
 <%
-    session = request.getSession(true);
+
     String userName = (String) session.getAttribute("authenticatedUser");
     String username = request.getParameter("username");
     if (userName != null){
