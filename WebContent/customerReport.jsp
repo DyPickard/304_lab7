@@ -37,7 +37,7 @@ try {
 }
 catch (Exception e){
 }
-out.print("<h2><li><a href=\"/shop/admin.jsp\">Back</a></li>");
+out.print("</table><h2><li><a href=\"/shop/admin.jsp\">Back</a></li>");
 %>
  
 </body>

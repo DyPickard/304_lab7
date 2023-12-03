@@ -9,28 +9,8 @@
 
 <h3>Edit Account Info</h3>
 
-<form name="MyForm" method=post action="createNewAccount.jsp">
+<form name="MyForm" method=post action="updateAccount.jsp">
 <table style="display:inline">
-<tr>
-	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">First Name</font></div></td>
-	<td><input type="text" name="firstName" size=10 maxlength="40" required></td>
-</tr>
-<tr>
-	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Last Name</font></div></td>
-	<td><input type="text" name="lastName" size=10 maxlength="40" required></td>
-</tr>
-<tr>
-	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Username</font></div></td>
-	<td><input type="text" name="username"  size=10 maxlength="20" required></td>
-</tr>
-<tr>
-	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Password</font></div></td>
-	<td><input type="password" name="password" size=10 minlength="5" maxlength="30" required></td>
-</tr>
-<tr>
-	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Confirm Password</font></div></td>
-	<td><input type="password" name="passwordConfirm" size=10 maxlength="30" required></td>
-</tr>
 <tr>
 	<td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Email Address</font></div></td>
 	<td><input type="email" name="emailAddress" size=10 maxlength="50" required></td>
@@ -61,14 +41,15 @@
 </tr>
 </table>
 <br/>
-<input class="submit" type="submit" name="submit" value="Create Account">
+<input class="submit" type="submit" name="submit" value="Update Account Info">
 </form>
-	<%
+<%
 	String error = request.getParameter("error");
     if (error != null && !error.isEmpty()) {
 		out.print("<h2>"+error+"</h2>");
-		 } 
-	%>
+	} 
+%>
+
 </body>
 </html>
 

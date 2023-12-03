@@ -24,11 +24,12 @@ try {
     while (r.next()){
         out.println("<tr><td>" + r.getDate("d") + "</td><td>" + currFormat.format(r.getFloat("t")) + "</td></tr>");
     }
-    out.println("</table><h2><a href=\"/shop/index.jsp\">Return to Main Menu</a></h3>");
+    out.println("</table>");
 }
 catch (Exception e){
 	out.println(e);
 }
+out.print("<h2><li><a href=\"/shop/admin.jsp\">Back</a></li>");
 %>
 
 </body>
