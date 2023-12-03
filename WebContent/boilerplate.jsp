@@ -29,10 +29,8 @@
 <ul class="menu">
         <li><a href="/shop/index.jsp">Home</a></li>
         <li><a href="listprod.jsp">Products</a></li>
-        <li><a href="listorder.jsp">Orders</a></li>
         <li><a href="showcart.jsp">Cart</a></li>
         
-
         <%
 	String userName2 = (String) session.getAttribute("authenticatedUser");
         // if logged in

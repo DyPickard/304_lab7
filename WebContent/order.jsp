@@ -23,8 +23,11 @@ String custId = request.getParameter("customerId");
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
 
-// Determine if valid customer id was entered
 
+    String userName = (String) session.getAttribute("authenticatedUser");
+    if (userName != null){
+
+// Determine if valid customer id was entered
 try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 	// search for customer id
 	PreparedStatement ps = con.prepareStatement("SELECT customerId FROM customer WHERE customerId = ?");
@@ -121,9 +124,10 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		catch (Exception e){
 	out.println(e);
 }
-
-// TO DO
-// Bonus Stuff
+	}
+	else {
+		out.println("Error. Log In.");
+	}
 %>
 </BODY>
 </HTML>

@@ -8,7 +8,7 @@
 <%@ include file="boilerplate.jsp" %>
 
 
-<h1>Order List</h1>
+<h1>Order Report</h1>
 <%
 //Note: Forces loading of SQL Server driver
 try
@@ -93,6 +93,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	out.println("</table>");
 	// close connection
 	con.close();
+	out.print("<h2><li><a href=\"/shop/admin.jsp\">Back</a></li>");
     }
 catch (SQLException ex){
     out.println("SQLException: " + ex); 

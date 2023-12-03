@@ -12,9 +12,9 @@
 
 
 <%
-
-out.println("</table><h2><a href=\"/shop/salesReport.jsp\">Sales Report</a></h3>");
-out.println("</table><h2><a href=\"/shop/customerReport.jsp\">Customer Report</a></h3>");
+out.println("<h2><a href=\"listorder.jsp\">Orders Report</a></h2>");
+out.println("<h2><a href=\"/shop/salesReport.jsp\">Sales Report</a></h2>");
+out.println("<h2><a href=\"/shop/customerReport.jsp\">Customers Report</a></h2>");
 %>
 
 </body>

@@ -13,6 +13,7 @@
 <%
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
+out.print("<h1>Customers Report</h1>");
 // Write SQL query that prints out total order amount by day
 try {
     getConnection();

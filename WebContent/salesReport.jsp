@@ -19,7 +19,7 @@ try {
     Statement s = con.createStatement();
     ResultSet r = s.executeQuery("SELECT CAST(orderDate AS DATE) as d, SUM(totalAmount) as t FROM ordersummary GROUP BY CAST(orderDate AS DATE);");
 
-    out.println("<h2>Administrator Sales Report by Day</h3><table border=2><tr><th>Order Date</th><th>Total Order Amount</th></tr>");
+    out.println("<h1>Administrator Sales Report by Day</h1><table border=2><tr><th>Order Date</th><th>Total Order Amount</th></tr>");
 
     while (r.next()){
         out.println("<tr><td>" + r.getDate("d") + "</td><td>" + currFormat.format(r.getFloat("t")) + "</td></tr>");
