@@ -106,7 +106,6 @@
                 response.sendRedirect("accountCreation.jsp?error=Username taken. Please try again.");
             }
 
-
             PreparedStatement ps = con.prepareStatement("INSERT INTO customer (firstName, lastName, email, phonenum, address, city, state, postalCode, country, userid, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
             ps.setString(1,firstName);
             ps.setString(2,lastName);
@@ -121,6 +120,7 @@
             ps.setString(11,password);
             ps.executeUpdate();
             out.print("<h2>Account Created!</h2>");
+            out.print("<h2><a href=\"login.jsp\">Go To Login</a></h2>");
         } 
         catch (Exception e){
             out.print(e);
