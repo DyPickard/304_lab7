@@ -97,11 +97,13 @@ if (userName != null){
 		out.println("</table>");
 		// close connection
 		con.close();
+		out.println("<h2><a href=\"/shop/customer.jsp\">Back</a></h3>");
 		}
 	catch (SQLException ex){
 		out.println("SQLException: " + ex); 
 	}
 		}
+		
 else {
 	out.println("<h2><a href=\"/shop/login.jsp\">Error. Please log in.</a></h3>");
 	}

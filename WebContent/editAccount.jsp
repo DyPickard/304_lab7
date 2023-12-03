@@ -44,6 +44,7 @@
 <input class="submit" type="submit" name="submit" value="Update Account Info">
 </form>
 <%
+	out.println("<h2><a href=\"/shop/customer.jsp\">Back</a></h3>");
 	String error = request.getParameter("error");
     if (error != null && !error.isEmpty()) {
 		out.print("<h2>"+error+"</h2>");

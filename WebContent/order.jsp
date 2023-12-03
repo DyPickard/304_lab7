@@ -18,31 +18,33 @@ String uid = "sa";
 String pw = "304#sa#pw";
 // import numberformat for currency variables.
 NumberFormat currFormat = NumberFormat.getCurrencyInstance();
-// Get customer id
-String custId = request.getParameter("customerId");
+
+// get username from session
+String userName = (String) session.getAttribute("authenticatedUser");
+
+// get cart from session
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
-
-
-    String userName = (String) session.getAttribute("authenticatedUser");
-    if (userName != null){
 
 // Determine if valid customer id was entered
 try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 	// search for customer id
-	PreparedStatement ps = con.prepareStatement("SELECT customerId FROM customer WHERE customerId = ?");
-	ps.setString(1, custId);
+	PreparedStatement ps = con.prepareStatement("SELECT customerId FROM customer WHERE userId = ?");
+	ps.setString(1, userName);
 	ResultSet results = ps.executeQuery();
-	// customer id is invalid
+
+	// no customer id is returned based on username
 	if (!results.next()) {
 		out.println("<h3>User id invalid</h3><h4><a href=\"/shop/checkout.jsp\">Re-enter id</a></h4>");
 	}
-	// product list is empoty
+	// product list is empty
 	else if (productList == null){
 		out.println("<h3>Error, no items in cart</h3><h4><a href=\"/shop/listprod.jsp\">Go to products</a></h4>");
 	}
-	else {
 	// id valid and product list is not empty
+	else {
+		// set customer ID 
+		String custId = results.getString("customerId");
 
 		// saves info to database
 		String sql = "INSERT INTO ordersummary (customerId, orderDate) VALUES (?, GETDATE())";
@@ -124,10 +126,8 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		catch (Exception e){
 	out.println(e);
 }
-	}
-	else {
-		out.println("Error. Log In.");
-	}
+
+
 %>
 </BODY>
 </HTML>
