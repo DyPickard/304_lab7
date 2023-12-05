@@ -61,3 +61,5 @@
 
     out.println("<form name=NewCategoryForm method=get action=createNewCategory.jsp><h5>New Category Name</h5><p><input type=text name=newCategory required><input type=submit value=Create></p></form>");
 %>
+
+<h3><a href=editProducts.jsp>Return To Previous Menu</h3>
