@@ -6,3 +6,6 @@ A list of sources used to build the website:
 
 - Inline css
     - https://www.w3schools.com/css/css_howto.asp
+
+- Removing items from cart
+    - https://chat.openai.com/share/afd5a658-99b0-4c65-8851-ec579a1776ae
