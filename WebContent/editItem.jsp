@@ -16,7 +16,7 @@
     String productId = request.getParameter("id");
     String productName = request.getParameter("productName");
     String productPrice = request.getParameter("productPrice");
-    String productURL = request.getParameter("productURL");
+    String productURL = request.getParameter("productImageURL");
     String productDesc = request.getParameter("productDescription");
     String productCategory = request.getParameter("categoryId");
     //Note: Forces loading of SQL Server driver

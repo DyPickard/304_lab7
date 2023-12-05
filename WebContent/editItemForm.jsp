@@ -43,6 +43,8 @@
         p1.setInt(1, Integer.valueOf(productId));
         ResultSet r1 = p1.executeQuery();
         r1.next();
+        out.println(r1.getString("productImageURL"));
+
         out.println("<form method=post action=editItem.jsp><table><tr><th>Product Name</th><td><input type=hidden name=id value=" + r1.getInt("productId") + "><input type=text name=productName value=\"" + r1.getString("productName") + "\" required</td></tr><tr><th><Product Price</th><td><input type=number name=productPrice value=" + r1.getFloat("productPrice") + " required></td></tr><tr><th>ImageURL</th><td><input type=text name=productImageURL value=\"" + r1.getString("productImageURL") + "\"></td></tr><tr><th>Product Description</th><td><textarea name=productDescription style=\"height:50px;\">" + r1.getString("productDesc") + "</textarea></td></tr><tr><th>Category</th><td><select name=categoryId>");
         while(r2.next()){
             // Gets the list of available categories
