@@ -37,8 +37,11 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
     ResultSet r = p.executeQuery();
     r.next();
 
+    NumberFormat cr = NumberFormat.getCurrencyInstance();
+	String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
+
     // Display data
-    out.println("<h2>" + r.getString("productName") + "</h2><table border=2><tr><th>Id</th><td>" + r.getInt("productId") + "</td></tr><tr><th>Price</th><td>" + r.getFloat("productPrice") + "</td></tr><tr><th>Description</th><td>" + r.getString("productDesc") + "</td>");
+    out.println("<h2>" + r.getString("productName") + "</h2><table border=2><tr><th>Id</th><td>" + r.getInt("productId") + "</td></tr><tr><th>Price</th><td>" + x + "</td></tr><tr><th>Description</th><td>" + r.getString("productDesc") + "</td>");
 
     // If there is no URL
     if (r.getString("productImageURL") != null){
