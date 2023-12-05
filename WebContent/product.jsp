@@ -37,6 +37,8 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
     ResultSet r = p.executeQuery();
     r.next();
 
+    int prodId = r.getInt("productId");
+
     NumberFormat cr = NumberFormat.getCurrencyInstance();
 	String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
 

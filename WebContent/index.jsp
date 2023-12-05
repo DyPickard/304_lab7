@@ -59,6 +59,8 @@
 
 		out.println("<table><tr><th>Product Name</th><th>Product Price</th><th>Number of times ordered</th></tr>");
 
+		
+
 		while (r.next()){
 			NumberFormat cr = NumberFormat.getCurrencyInstance();
 			String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
