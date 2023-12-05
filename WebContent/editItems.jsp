@@ -49,10 +49,10 @@
         Statement s1 = con.createStatement();
         ResultSet r1 = s1.executeQuery("SELECT productId, productName FROM product ORDER BY productName ASC;");
 
-        out.println("<table><tr><th>View Item</th><th>Edit Item</th></tr>");
+        out.println("<table><tr><th>Delete Item</th><th>View Item</th><th>Edit Item</th></tr>");
 
         while (r1.next()){
-            out.println("<tr><td><a href=product.jsp?id=" + r1.getInt("productId") + ">" + r1.getString("productName") + "</td><td><a href=editItemForm.jsp?id=" + r1.getInt("productId") + ">Edit</a></td></tr>");
+            out.println("<tr><td><a class=button style=\"color:red;\" href=deleteItem.jsp?id=" + r1.getInt("productId") + ">Delete</td><td><a href=product.jsp?id=" + r1.getInt("productId") + ">" + r1.getString("productName") + "</td><td><a class=button style=\"color:green;\" href=editItemForm.jsp?id=" + r1.getInt("productId") + ">Edit</a></td></tr>");
         }
 
         out.println("</table>");
