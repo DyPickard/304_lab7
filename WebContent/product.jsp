@@ -30,7 +30,7 @@ String pw = "304#sa#pw";
 String id = request.getParameter("id");
 
 try ( Connection con = DriverManager.getConnection(url, uid, pw)){
-    
+    String userName = (String) session.getAttribute("authenticatedUser");
     // Get product name
     PreparedStatement p = con.prepareStatement("SELECT productId, productName, productPrice, productImageURL, productImage, productDesc FROM product WHERE productId = ?;");
     p.setString(1, id);
@@ -53,16 +53,36 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
         out.println("<img src=\"displayImage.jsp?id=" + r.getInt("productId") + "\"");
     }
     out.println("</table><h3><a href=\"addcart.jsp?id=" + r.getInt("productId") + "&name=" + r.getString("productName") + "&price=" + r. getFloat("productPrice") + "\">Add to Cart</a></h3><h3><a href=\"listprod.jsp\">Continue Shopping</a></h3>");
+
+%>
+
+<form action="createReview.jsp?pid=<%= prodId %>" method="post">
+<label for="rating">Rating:</label>
+<select id="rating" name="rating" required>
+  <option value="">Select Rating</option>
+  <option value="5">5 Stars</option>
+  <option value="4">4 Stars</option>
+  <option value="3">3 Stars</option>
+  <option value="2">2 Stars</option>
+  <option value="1">1 Star</option>
+</select><br><br>
+<label for="review_comment">Review Comment:</label><br>
+<textarea id="review_comment" name="review_comment" rows="4" cols="50" minlength="10" maxlength="1000" required></textarea><br><br>
+<input type="submit" value="Submit">
+</form>
+
+<%
+
+
+
+
 }
 catch (SQLException ex)
 {
     out.println(ex);
-
 	System.err.println("SQLException: " + ex);
 }
-
 %>
-
 </body>
 </html>
 
