@@ -42,7 +42,7 @@
 
         out.println("<table><tr><th></th><th>Product Name</th><th>Inventory Amount</th><th>Warehouse</th><th>Update Amount</th></tr>");
         while (r1.next()){
-            out.println("<form method=get action=updateInventory.jsp><input type=hidden name=id value=" + r1.getInt("productId") + "><tr><td><a href=\"deleteInventory.jsp?pId=" + r1.getInt("productId") + "&wId" + r1.getInt("warehouseId") + "\">Delete</a></td><td>" + r1.getString("productName") + "</td><td><input type=number value=\"" + r1.getInt("T") + "\"</td><td>" + r1.getString("warehouseName") + "<td class=update><input type=submit value=\"Update\"</td></tr></form>");
+            out.println("<form method=get action=updateInventory.jsp><input type=hidden name=id value=" + r1.getInt("productId") + "><tr><td><a href=\"deleteInventory.jsp?pId=" + r1.getInt("productId") + "&wId=" + r1.getInt("warehouseId") + "\">Delete</a></td><td>" + r1.getString("productName") + "</td><td><input type=number value=\"" + r1.getInt("T") + "\"</td><td>" + r1.getString("warehouseName") + "<td class=update><input type=submit value=\"Update\"</td></tr></form>");
         }
         out.println("</table>");
     }

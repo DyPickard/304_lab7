@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>New Product</title>
+<title>New Inventory</title>
 </head>
 <style>
 
@@ -40,7 +40,7 @@
         out.println("<br><form method=post action=createNewInventory.jsp><label for=productId>Product:</label><select name=productId>");
 
         Statement s1 = con.createStatement();
-        ResultSet r1 = s1.executeQuery("SELECT productId, productName FROM product ORDER BY productName ASC;");
+        ResultSet r1 = s1.executeQuery("SELECT productId, productName FROM product WHERE productId NOT IN (SELECT productId FROM productinventory) ORDER BY productName ASC;"); // Just shows the items that are not yet in a warehouse.
         while(r1.next()){
             out.println("<option value=" + r1.getInt("productId") + ">" + r1.getString("productName") + "</option>");
         }
