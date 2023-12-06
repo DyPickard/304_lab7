@@ -34,11 +34,9 @@ catch (Exception e){
 
 	out.println(e);
 }
-String sql = "";
 
-// Make sure to close connection
+
 %>
-
 </body>
 </html>
 
