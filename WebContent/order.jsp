@@ -115,7 +115,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw)) {
 		rs1.next();
 		out.println("</table>");
 		out.println("<h2>Order Number: "+orderId+"</h2>");
-		out.println("<h2>Order Total: "+currFormat.format(totalPrice)+"</h2><h2>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h2><h3><a href=\"/shop/\">Return to Home Page</a></h3>");
+		out.println("<h2>Order Total: "+currFormat.format(totalPrice)+"</h2><h2>Shipping to customer: #" + rs1.getInt("id") + " Name: " + rs1.getString("firstName") + " " + rs1.getString("lastName") + "</h2><h3><a href=index.jsp">Return to Home Page</a></h3>");
 
 		// Clear cart
 		session.removeAttribute("productList");
