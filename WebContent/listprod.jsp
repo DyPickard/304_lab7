@@ -14,14 +14,32 @@
 <label for="category">Category</label>
 <select id="category" name="category">
 <option value="All">All</option>
-<option value="Beverages">Beverages</option>
-<option value="Condiments">Condiments</option>
-<option value="Dairy Products">Dairy Products</option>
-<option value="Produce">Produce</option>
-<option value="Meat/Poultry">Meat/Poultry</option>
-<option value="Seafood">Seafood</option>
-<option value="Confections">Confections</option>
-<option value="Grains/Cereals">Grains/Cereals</option>
+
+
+<%
+try
+{	// Load driver class
+	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+}
+catch (java.lang.ClassNotFoundException e)
+{
+	out.println("ClassNotFoundException: " +e);
+}
+
+// Make the connection
+
+String url1 = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
+String uid1 = "sa";
+String pw1 = "304#sa#pw"; 
+try ( Connection con = DriverManager.getConnection(url1, uid1, pw1)){
+	Statement s1 = con.createStatement();
+	ResultSet r1 = s1.executeQuery("SELECT categoryName FROM category ORDER BY categoryName ASC;");
+	while (r1.next()){
+		out.println("<option value=\"" + r1.getString("categoryName") + "\">" + r1.getString("categoryName") +  "</option>");
+	}
+}
+
+%>
 <input type="submit" value="Submit"><input type="reset" value="Reset">
 </form>
 
