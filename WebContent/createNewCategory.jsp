@@ -17,9 +17,8 @@
     String uid = "sa";
     String pw = "304#sa#pw"; 
     try ( Connection con = DriverManager.getConnection(url, uid, pw)){
-        PreparedStatement p1 = con.prepareStatement("INSERT INTO productinventory() VALUES (?)");
+        PreparedStatement p1 = con.prepareStatement("INSERT INTO category(categoryName) VALUES (?)");
         p1.setString(1, categoryName);
-
         p1.execute();
     }
 %>

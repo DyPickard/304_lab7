@@ -17,8 +17,8 @@
     String uid = "sa";
     String pw = "304#sa#pw"; 
     try ( Connection con = DriverManager.getConnection(url, uid, pw)){
-        PreparedStatement p1 = con.prepareStatement("DELETE FROM category WHERE categoryId = ?");
-        p1.setString(1, categoryId);
+        PreparedStatement p1 = con.prepareStatement("DELETE FROM category WHERE categoryId = ?;");
+        p1.setInt(1, Integer.valueOf(categoryId));
         p1.execute();
     }
 %>
