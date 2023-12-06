@@ -36,7 +36,7 @@ if (r.next()){
 else {
     response.sendRedirect("login.jsp?loginMessage=Please login to review a product.");
 }
-out.print(pid);
+
 // insert review into DB
     try {
     PreparedStatement ps2 = con.prepareStatement("INSERT INTO review (reviewRating, reviewDate, customerId, productId, reviewComment) VALUES (?, ?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
