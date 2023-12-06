@@ -56,6 +56,20 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
     }
     out.println("</table><h3><a href=\"addcart.jsp?id=" + r.getInt("productId") + "&name=" + r.getString("productName") + "&price=" + r. getFloat("productPrice") + "\">Add to Cart</a></h3><h3><a href=\"listprod.jsp\">Continue Shopping</a></h3>");
 
+    out.println("<h2>Reviews</h2>");
+
+    // test
+    PreparedStatement p2 = con.prepareStatement("SELECT * FROM review WHERE productId = ?");
+    p2.setInt(1,prodId);
+    ResultSet r2 = p2.executeQuery();
+    out.print(r2.next());
+    while (r2.next()){
+        out.print("<h2>test</h2>");
+        out.print(r2.getString("reviewRating"));
+        out.print(r2.getString("reviewDate"));
+        out.print(r2.getString("reviewComment"));
+    }
+
 %>
 
 <form action="createReview.jsp?pid=<%= prodId %>" method="post">
@@ -69,7 +83,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
   <option value="1">1 Star</option>
 </select><br><br>
 <label for="review_comment">Review Comment:</label><br>
-<textarea id="review_comment" name="review_comment" rows="4" cols="50" minlength="10" maxlength="1000" required></textarea><br><br>
+<textarea id="review_comment" name="review_comment" rows="4" cols="50" minlength="3" maxlength="1000" required></textarea><br><br>
 <input type="submit" value="Submit">
 </form>
 

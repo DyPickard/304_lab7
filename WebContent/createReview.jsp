@@ -38,16 +38,23 @@ else {
     response.sendRedirect("login.jsp?loginMessage=Please login to review a product.");
 }
 // insert review into DB
-PreparedStatement ps2 = con.prepareStatement("INSERT INTO review (reviewRating, reviewDate, customerId, productId, reviewComment) VALUES (?, GETDATE(), ?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
-ps2.setString(1,reviewRating);
-ps2.setString(2,cId);
-ps2.setString(3,prodId);
-ps2.setString(4,comment);
+    try {
+    PreparedStatement ps2 = con.prepareStatement("INSERT INTO review (reviewRating, reviewDate, customerId, productId, reviewComment) VALUES (?, GETDATE(), ?, ?, ?)",Statement.RETURN_GENERATED_KEYS);
+    ps2.setString(1,reviewRating);
+    ps2.setString(2,cId);
+    ps2.setString(3,prodId);
+    ps2.setString(4,comment);
+    ps2.executeUpdate();
+    out.print("<h2>Review Created!</h2>");
+    }
+    catch (Exception e){
+        out.print(e);
+    }
+
 } 
 catch (Exception e){
     out.print(e);
 }
-
 %>
 </body>
 </html>
