@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>A&D Grocery</title>
+<title>A&D Textiles</title>
 </head>
 <body>
 

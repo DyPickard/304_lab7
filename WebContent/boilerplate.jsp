@@ -1,4 +1,4 @@
-<title>A&D Grocery</title>
+<title>A&D Textiles Menu</title>
 <style>
         .menu {
         list-style-type: none;

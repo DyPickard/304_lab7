@@ -15,7 +15,7 @@
 </style>
 
 <body>
-<h1 align="center">Welcome to A&D Grocery</h1>
+<h1 align="center">Welcome to A&D Textiles</h1>
 
 <!-- <h2 align="center"><a href="login.jsp">Login</a></h2> -->
 
