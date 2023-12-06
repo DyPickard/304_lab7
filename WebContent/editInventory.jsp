@@ -39,7 +39,7 @@
         ResultSet r1 = s1.executeQuery("SELECT productName, SUM(quantity) as T, warehouseName FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseName GROUP BY productName, warehouseName ORDER BY productName ASC;");
 
         out.println("<table>");
-
+//todo
         while (r1.next()){
             out.println("<form method=get action=updateInventory.jsp><tr><td><td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newCategoryName type=text value=\"" + r1.getString("categoryName") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
         }
