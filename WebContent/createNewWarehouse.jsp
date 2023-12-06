@@ -1,7 +1,8 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 
 <%
-    String categoryId = request.getParameter("id");
+    String id = request.getParameter("warehouseName");
+
     //Note: Forces loading of SQL Server driver
     try
     {	// Load driver class
@@ -17,8 +18,8 @@
     String uid = "sa";
     String pw = "304#sa#pw"; 
     try ( Connection con = DriverManager.getConnection(url, uid, pw)){
-        PreparedStatement p1 = con.prepareStatement("DELETE FROM warehouse WHERE warehouseId = ?");
-        p1.setString(1, categoryId);
+        PreparedStatement p1 = con.prepareStatement("INSERT INTO warehouse (warehouseName) VALUES (?);");
+        p1.setString(1, id);
         p1.execute();
     }
 %>
