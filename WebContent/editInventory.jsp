@@ -36,20 +36,16 @@
         
         // Get the list of all categories
         Statement s1 = con.createStatement();
-        ResultSet r1 = s1.executeQuery("SELECT productName, SUM(quantity) as T, warehouseName FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseName GROUP BY productName, warehouseName ORDER BY productName ASC;");
+        ResultSet r1 = s1.executeQuery("SELECT product.productId, productName, SUM(productinventory.quantity) as T, warehouseName, productinventory.warehouseId FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseId GROUP BY product.productId, productName, warehouseName, productinventory.warehouseId ORDER BY productName ASC;");
 
-        out.println("<table>");
-//todo
+        out.println("<h3><a href=newInventory.jsp>Add New Inventory</a></h3>");
+
+        out.println("<table><tr><th></th><th>Product Name</th><th>Inventory Amount</th><th>Warehouse</th><th>Update Amount</th></tr>");
         while (r1.next()){
-            out.println("<form method=get action=updateInventory.jsp><tr><td><td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newCategoryName type=text value=\"" + r1.getString("categoryName") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
+            out.println("<form method=get action=updateInventory.jsp><input type=hidden name=id value=" + r1.getInt("productId") + "><tr><td><a href=\"deleteInventory.jsp?pId=" + r1.getInt("productId") + "&wId" + r1.getInt("warehouseId") + "\">Delete</a></td><td>" + r1.getString("productName") + "</td><td><input type=number value=\"" + r1.getInt("T") + "\"</td><td>" + r1.getString("warehouseName") + "<td class=update><input type=submit value=\"Update\"</td></tr></form>");
         }
         out.println("</table>");
     }
-
-    // Below is used for adding a category
-    out.println("<h3>Add a Category</h3>");
-
-    out.println("<form name=NewCategoryForm method=get action=createNewCategory.jsp><input type=text name=newCategory required><input type=submit value=Create></form>");
 %>
 
-<h3><a href=editProducts.jsp>Return To Previous Menu</h3>
+<h3><a href=admin.jsp>Return To Previous Menu</h3>
