@@ -43,7 +43,7 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 	String x = cr.format(r.getFloat("productPrice")); // Used to change float value into currency string format for display
 
     // Display data
-    out.println("<h2>" + r.getString("productName") + "</h2><table border=2><tr><th>Id</th><td>" + r.getInt("productId") + "</td></tr><tr><th>Price</th><td>" + x + "</td></tr><tr><th>Description</th><td>" + r.getString("productDesc") + "</td>");
+    out.println("<h2>" + r.getString("productName") + "<h2><table border=2><tr><th>Id</th><td>" + r.getInt("productId") + "</td></tr><tr><th>Price</th><td>" + x + "</td></tr><tr><th>Description</th><td>" + r.getString("productDesc") + "</td>");
 
     // If there is no URL
     if (r.getString("productImageURL") != null){
@@ -58,18 +58,19 @@ try ( Connection con = DriverManager.getConnection(url, uid, pw)){
 
     out.println("<h2>Reviews</h2>");
 
-    // test
+    // search for reviews 
     PreparedStatement p2 = con.prepareStatement("SELECT * FROM review WHERE productId = ?");
     p2.setInt(1,prodId);
     ResultSet r2 = p2.executeQuery();
-    out.print(r2.next());
+    out.println("<table border=1><tr><th>Rating</th><th>Review</th><th>Date</th></tr>");
     while (r2.next()){
-        out.print("<h2>test</h2>");
-        out.print(r2.getString("reviewRating"));
-        out.print(r2.getString("reviewDate"));
-        out.print(r2.getString("reviewComment"));
+        String reviewRating = r2.getString("reviewRating");
+        String date = r2.getString("reviewDate");
+        date = date.substring(0,10);
+        String comment = r2.getString("reviewComment");
+        out.print("<tr><td>"+reviewRating+"</td><td>"+comment+"</td><td>"+date+"</td></tr>");
     }
-
+    out.println("</table><br>");
 %>
 
 <form action="createReview.jsp?pid=<%= prodId %>" method="post">
