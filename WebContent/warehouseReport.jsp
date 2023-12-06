@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Edit Items</title>
+<title>Warehouse Report</title>
 </head>
 <style>
 
@@ -49,10 +49,10 @@
         Statement s1 = con.createStatement();
         ResultSet r1 = s1.executeQuery("SELECT * FROM warehouse");
 
-        out.println("<table>");
+        out.println("<table><tr><th>Delete</th><th>View Warehouse</th></tr>");
 
         while (r1.next()){
-            out.println("<tr><td><a class=button style=\"color:red;\" href=deleteWarehouse.jsp?id=" + r1.getInt("warehouseId") + ">Delete</td><td>" + r1.getString("warehouseName") + "</td></tr>");
+            out.println("<tr><td><a class=button style=\"color:red;\" href=deleteWarehouse.jsp?id=" + r1.getInt("warehouseId") + ">Delete</td><td><a href=\"viewWareHouseInventory.jsp?id=" +r1.getInt("warehouseId") + "\">" + r1.getString("warehouseName") + "</td></tr>");
         }
 
         out.println("</table>");

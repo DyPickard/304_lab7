@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Administrator Page</title>
+<title>Edit Products</title>
 </head>
 <body>
 <%@ include file="boilerplate.jsp" %>
@@ -12,8 +12,8 @@
 
 
 <%
-out.println("<h2><a href=\"/shop/editCategories.jsp\">Edit Categories</a></h2>");
-out.println("<h2><a href=\"/shop/editItems.jsp\">Edit Items</a></h2>");
+out.println("<h2><a href=\"/shop/editCategories.jsp\">Categories</a></h2>");
+out.println("<h2><a href=\"/shop/editItems.jsp\">Items</a></h2>");
 out.println("<h3><a href=\"/shop/admin.jsp\">Back To Previous Menu</a></h3>");
 %>
 
