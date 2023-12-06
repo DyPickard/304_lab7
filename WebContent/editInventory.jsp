@@ -5,16 +5,6 @@
 </head>
 <style>
 
-    .delete {
-        color:red;
-    }
-    .update {
-        color:green;
-    }
-    td,th {
-        padding-left:20px;
-    }
-
 </style>
 <body>
 <%@ include file="boilerplate.jsp" %>
@@ -46,7 +36,7 @@
         
         // Get the list of all categories
         Statement s1 = con.createStatement();
-        ResultSet r1 = s1.executeQuery("SELECT categoryId, categoryName FROM category ORDER BY categoryName ASC;");
+        ResultSet r1 = s1.executeQuery("SELECT productName, SUM(quantity), warehouseName FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseName GROUP BY productName, warehouseName ORDER BY productName ASC;");
 
         out.println("<table><th>Delete</th><th>Category Name</th><th>Update</th></tr>");
 
