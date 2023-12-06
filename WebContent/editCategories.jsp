@@ -48,10 +48,10 @@
         Statement s1 = con.createStatement();
         ResultSet r1 = s1.executeQuery("SELECT categoryId, categoryName FROM category ORDER BY categoryName ASC;");
 
-        out.println("<table>");
+        out.println("<table><tr><th>Delete</th><th><Category Name</th><th>Update</th></tr>");
 
         while (r1.next()){
-            out.println("<form name=UpdateCatName method=get action=updateInventory.jsp><tr><td>" + r1.getString("categoryName") + "<td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newValue type=number value=\"" + r1.getInt("") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
+            out.println("<tr><td><a href=deleteCategory.jsp?id=" + r1.getInt("categoryId") + "</a>Delete</td><form method=get action=updateCategory.jsp><td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newValue type=text value=\"" + r1.getString("categoryName") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
         }
         out.println("</table>");
     }

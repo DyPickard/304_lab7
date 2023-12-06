@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 
 <%
-    String newCatName = request.getParameter("newCategoryName");
+    String newCatName = request.getParameter("newValue");
     String newCatId = request.getParameter("newCatId");
     //Note: Forces loading of SQL Server driver
     try
