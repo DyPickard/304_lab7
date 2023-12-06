@@ -38,7 +38,7 @@
         Statement s1 = con.createStatement();
         ResultSet r1 = s1.executeQuery("SELECT product.productId, productName, SUM(productinventory.quantity) as T, warehouseName, productinventory.warehouseId FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseId GROUP BY product.productId, productName, warehouseName, productinventory.warehouseId ORDER BY productName ASC;");
 
-        out.println("<h3><a href=newInventory.jsp>Add New Inventory</a></h3>");
+        out.println("<h3><a href=newInventory.jsp>Add New Inventory</a></h3><h3><a href=admin.jsp>Return To Previous Menu</h3>");
 
         out.println("<table><tr><th></th><th>Product Name</th><th>Inventory Amount</th><th>Warehouse</th><th>Update Amount</th></tr>");
         while (r1.next()){
@@ -48,4 +48,4 @@
     }
 %>
 
-<h3><a href=admin.jsp>Return To Previous Menu</h3>
+</body></html>
