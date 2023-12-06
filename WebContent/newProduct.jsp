@@ -62,7 +62,7 @@
     String pw = "304#sa#pw"; 
     try ( Connection con = DriverManager.getConnection(url, uid, pw)){
         Statement s1 = con.createStatement();
-        ResultSet r1 = s1.executeQuery("SELECT * FROM category;");
+        ResultSet r1 = s1.executeQuery("SELECT * FROM category ORDER BY productName ASC;");
         while(r1.next()){
             out.println("<option value=" + r1.getInt("categoryId") + ">" + r1.getString("categoryName") + "</option>");
         }
