@@ -36,12 +36,12 @@
         
         // Get the list of all categories
         Statement s1 = con.createStatement();
-        ResultSet r1 = s1.executeQuery("SELECT productName, SUM(quantity), warehouseName FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseName GROUP BY productName, warehouseName ORDER BY productName ASC;");
+        ResultSet r1 = s1.executeQuery("SELECT productName, SUM(quantity) as T, warehouseName FROM product JOIN productinventory ON product.productId = productinventory.productId JOIN warehouse ON productinventory.warehouseId = warehouse.warehouseName GROUP BY productName, warehouseName ORDER BY productName ASC;");
 
-        out.println("<table><th>Delete</th><th>Category Name</th><th>Update</th></tr>");
+        out.println("<table>");
 
         while (r1.next()){
-            out.println("<form name=UpdateCatName method=get action=updateCategory.jsp><tr><td class=delete><a href=\"deleteCategory.jsp?id=" + r1.getInt("categoryId") + "\" class=delete>Delete</td><td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newCategoryName type=text value=\"" + r1.getString("categoryName") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
+            out.println("<form method=get action=updateInventory.jsp><tr><td><td><input type=hidden name=newCatId value=" + r1.getInt("categoryId") + "><input name=newCategoryName type=text value=\"" + r1.getString("categoryName") + "\"></td><td class=update><input type=submit value=\"Update\"</td></tr></form>");
         }
         out.println("</table>");
     }
