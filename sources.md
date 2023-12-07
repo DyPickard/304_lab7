@@ -9,3 +9,6 @@ A list of sources used to build the website:
 
 - Removing items from cart
     - https://chat.openai.com/share/afd5a658-99b0-4c65-8851-ec579a1776ae
+
+- Setting a default value in sql server
+    - https://chat.openai.com/share/8aa712a1-226f-4c74-b543-9a88c59cf842
